@@ -10,6 +10,8 @@ import {
 } from "@nestjs/common";
 import { MoviesService } from "./movies.service";
 import { Movie } from "./entities/movie.entity";
+import { CreateMovieDto } from "./dto/create-movie.dto";
+import { UpdateMovieDto } from "./dto/update-movie.dto";
 
 /** 컨트롤러는 URL을 라우팅하고 비즈니스 로직 처리 결과를 클라이언트에 전달하는 역활을 담당한다 */
 @Controller("movies")
@@ -31,13 +33,13 @@ export class MoviesController {
   }
 
   @Get(":id")
-  getOne(@Param("id") movieId: string) {
+  getOne(@Param("id") movieId: number) {
     // 라우트 경로에서 :파라미터명 으로 정의된 동적 값을 가져올 때에는 @Param을 사용한다
     return this.moviesService.getOne(movieId);
   }
 
   @Post()
-  create(@Body() movieData) {
+  create(@Body() movieData: CreateMovieDto) {
     // 라우트 경로에서 전달된 데이터를 가져올 때에는 @Body()를 사용한다
     // 필요한 데이터는 반드시 직접 요청해야 한다
     // 반환이 자동으로 JSON으로 변환된다
@@ -45,12 +47,12 @@ export class MoviesController {
   }
 
   @Delete(":id")
-  remove(@Param("id") movieId: string) {
+  remove(@Param("id") movieId: number) {
     return this.moviesService.deleteOne(movieId);
   }
 
   @Patch(":id")
-  patch(@Param("id") movieId: string, @Body() updateData) {
+  patch(@Param("id") movieId: number, @Body() updateData: UpdateMovieDto) {
     return this.moviesService.update(movieId, updateData);
   }
 }

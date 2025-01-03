@@ -1,5 +1,7 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { Movie } from "./entities/movie.entity";
+import { CreateMovieDto } from "./dto/create-movie.dto";
+import { UpdateMovieDto } from "./dto/update-movie.dto";
 
 @Injectable()
 export class MoviesService {
@@ -9,7 +11,7 @@ export class MoviesService {
     return this.movies;
   }
 
-  getOne(id: string): Movie {
+  getOne(id: number): Movie {
     const movie = this.movies.find(movie => movie.id === +id);
 
     if (!movie) {
@@ -19,12 +21,12 @@ export class MoviesService {
     return movie;
   }
 
-  deleteOne(id: string) {
+  deleteOne(id: number) {
     this.getOne(id);
-    this.movies = this.movies.filter(movie => movie.id !== +id);
+    this.movies = this.movies.filter(movie => movie.id !== id);
   }
 
-  create(movieData: Movie) {
+  create(movieData: CreateMovieDto) {
     this.movies.push({
       id: this.movies.length + 1,
       ...movieData,
@@ -32,7 +34,7 @@ export class MoviesService {
     return this.movies.at(-1);
   }
 
-  update(id: string, updateData: Movie) {
+  update(id: number, updateData: UpdateMovieDto) {
     const movie = this.getOne(id);
     this.deleteOne(id); // 실제 DB가 아니기 때문에 삭제 후 다시 생성해야 한다
     this.movies.push({ ...movie, ...updateData });
