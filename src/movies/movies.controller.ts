@@ -13,7 +13,7 @@ import { Movie } from "./entities/movie.entity";
 import { CreateMovieDto } from "./dto/create-movie.dto";
 import { UpdateMovieDto } from "./dto/update-movie.dto";
 
-/** 컨트롤러는 URL을 라우팅하고 비즈니스 로직 처리 결과를 클라이언트에 전달하는 역활을 담당한다 */
+/** 컨트롤러는 URL을 라우팅하고 비즈니스 로직 처리 결과를 클라이언트에 전달하는 역할을 담당한다 */
 @Controller("movies")
 export class MoviesController {
   // 컨트롤러에서 서비스를 주입받아 사용한다

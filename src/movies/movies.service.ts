@@ -3,6 +3,7 @@ import { Movie } from "./entities/movie.entity";
 import { CreateMovieDto } from "./dto/create-movie.dto";
 import { UpdateMovieDto } from "./dto/update-movie.dto";
 
+/** 서비스는 비즈니스 로직을 처리하는 역할을 담당한다 */
 @Injectable()
 export class MoviesService {
   private movies: Movie[] = [];
